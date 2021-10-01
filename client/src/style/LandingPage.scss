@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sec {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .dot {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: box-shadow 0.5s;
+    &:active {
+      /*on hold*/
+      box-shadow: 0 0 0 200vh #fff;
+      border: 2px solid #000;
+    }
+    &.active {
+      background: #000;
+      border: 2px solid #000;
+      &:active {
+        box-shadow: 0 0 0 200vh #000;
+        border: 2px solid #fff;
+      }
+      &::before {
+        content: "Dark Mode";
+        color: #000;
+      }
+    }
+    &::before {
+      content: "Light Mode";
+      position: absolute;
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1em;
+      font-weight: 500;
+      color: #fff;
+      white-space: nowrap;
+    }
+  }
+  h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 100%;
+    font-size: 30vw;
+    font-weight: 800;
+    color: #fff;
+    background: #000;
+    user-select: none;
+    text-transform: uppercase;
+    text-align: center;
+    mix-blend-mode: multiply;
+  }
+  &.active {
+    button span {
+      color: #000;
+    }
+  }
+  &.active h2 {
+    color: #000;
+    background: #fff;
+    mix-blend-mode: screen;
+  }
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* z-index: 1; */
+  }
+  button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: none;
+    border-bottom: 1px solid #999;
+    outline: none;
+    padding: 5px 20px;
+    background: inherit;
+    &:hover {
+      background: rgba(153, 153, 153, 0.5);
+      border-radius: 5px;
+    }
+    cursor: pointer;
+    transition: 0.5s;
+    span {
+      font-size: 1em;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
+}

@@ -1,85 +1,79 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../_actions/user_action';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../_actions/user_action";
+import { withRouter } from "react-router-dom";
+
+import StyledBackground from "../../../style/styledBackground";
+import StyledInput from "../../../style/styledInput";
+import StyledForm from "../../../style/styledForm";
+import StyledButton from "../../../style/styledButton";
+import StyledTitle from "../../../style/styledTitle";
 
 function LoginPage(props) {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [inputs, setInputs] = useState({
-        email: "",
-        password: ""
+  const { email, password } = inputs;
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    let body = {
+      email: email,
+      password: password,
+    };
+
+    dispatch(loginUser(body)).then((response) => {
+      if (response.payload.loginSuccess) {
+        props.history.push("/");
+      } else {
+        alert("Error");
+      }
     });
 
-    const { email, password } = inputs;
+    setInputs({
+      email: "",
+      password: "",
+    });
+  };
 
-    const onChange = e => {
-        const { name, value } = e.target;
-        setInputs({
-            ...inputs,
-            [name]: value
-        });
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-        let body = {
-            email: email,
-            password: password
-        };
-
-        dispatch(loginUser(body))
-            .then(response => {
-                if(response.payload.loginSuccess) {
-                    props.history.push('/')
-                } else {
-                    alert('Error');
-                }
-            })
-
-        setInputs({
-            email: "",
-            password: ""
-        })
-    };
-
-    return (
-        <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100vh"
-        }}>
-            <form 
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-                onSubmit={onSubmit}
-            >
-                <label>Email </label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    placeholder="이메일을 입력해주세요." 
-                    onChange={onChange}
-                    value={email} 
-                />
-                <label>Password </label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    onChange={onChange}
-                    value={password} 
-                />
-                <br />
-                <input type="submit" value="Login" />
-            </form>
-        </div>
-    );
+  return (
+    <StyledBackground>
+      <StyledForm onSubmit={onSubmit}>
+        <StyledTitle>Sign In</StyledTitle>
+        <label>Email </label>
+        <StyledInput
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          onChange={onChange}
+          value={email}
+        />
+        <label>Password </label>
+        <StyledInput
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          onChange={onChange}
+          value={password}
+        />
+        <br />
+        <StyledButton>submit</StyledButton>
+      </StyledForm>
+    </StyledBackground>
+  );
 }
 
 export default withRouter(LoginPage);
