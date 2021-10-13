@@ -58,6 +58,7 @@ function LoginPage(props) {
           type="email"
           name="email"
           placeholder="Enter Email"
+          autoComplete="off"
           onChange={onChange}
           value={email}
         />

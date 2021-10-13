@@ -60,6 +60,7 @@ function RegisterPage(props) {
           type="email"
           name="email"
           placeholder="Enter Email"
+          autoComplete="off"
           onChange={onChange}
           value={email}
         />
@@ -68,6 +69,7 @@ function RegisterPage(props) {
           type="text"
           name="name"
           placeholder="Enter Name"
+          autoComplete="off"
           onChange={onChange}
           value={name}
         />
