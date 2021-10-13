@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -87,6 +88,14 @@ app.get("/api/users/logout", auth, (req, res) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({ success: true });
   });
+});
+
+// 리액트 정적 파일 제공
+app.use(express.static(path.join(__dirname, "client/build")));
+
+// 라우트 설정
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
 //const port = 5000; // 개발 시 확인할 포트
