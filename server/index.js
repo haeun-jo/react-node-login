@@ -93,15 +93,15 @@ app.get("/api/users/logout", auth, (req, res) => {
   });
 });
 
-// 리액트 정적 파일 제공
 if (process.env.NODE_ENV === "production") {
+  // 리액트 정적 파일 제공
   app.use(express.static(path.join(__dirname, "client/build")));
-}
 
-// 라우트 설정
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
-});
+  // 라우트 설정
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
 
 //const port = 5000; // 개발 시 확인할 포트
 const port = process.env.PORT || 5000; // 헤로쿠 배포 시
