@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 
@@ -46,6 +47,16 @@ function LandingPage(props) {
         <button onClick={onClick}>
           <span>Log Out</span>
         </button>
+        <Link to="/login">
+          <button>
+            <span>Sign In</span>
+          </button>
+        </Link>
+        <Link to="/register">
+          <button>
+            <span>Register</span>
+          </button>
+        </Link>
       </section>
     </>
   );
