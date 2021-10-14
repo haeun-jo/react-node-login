@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -13,6 +14,7 @@ const { auth } = require("./middleware/auth");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(cors());
 
 mongoose
   .connect(config.MONGO_URI, {
