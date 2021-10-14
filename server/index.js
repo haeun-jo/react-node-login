@@ -15,11 +15,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 mongoose
-  .connect(config.mongoURI)
+  .connect(config.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-app.get("/", (req, res) => res.send("Hello~!"));
+//app.get("/", (req, res) => res.send("Hello~!"));
 
 app.get("/api/hello", (req, res) => res.send("안녕하세요~!"));
 
@@ -91,10 +94,12 @@ app.get("/api/users/logout", auth, (req, res) => {
 });
 
 // 리액트 정적 파일 제공
-app.use(express.static(path.join(__dirname, "client/build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 // 라우트 설정
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 

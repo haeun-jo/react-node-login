@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "heroku-postbuild": "cd client && yarn install && yarn build",
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run start --prefix client\"",
