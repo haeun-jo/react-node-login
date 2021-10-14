@@ -99,7 +99,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // 라우트 설정
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
